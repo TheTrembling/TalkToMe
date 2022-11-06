@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace TalkToMe
 {
     public partial class UsersSearching : Form
     {
+        string connectionString = "data source=192.168.1.4, 1433;initial catalog=TTM;User ID='sa';Password='adm123'";
         bool activated = true;
+
         public string yourNickname
         {
             get { return lgn; }
@@ -210,7 +213,7 @@ namespace TalkToMe
             userList.Items.Clear();
             var values = new List<string>();
 
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=TTM; Integrated Security=SSPI;";
+            
 
             if (idCb.Checked) values.Add($"Id = {id.Text}");
             if (loginCb.Checked) values.Add($"Login = N'{login.Text}'");

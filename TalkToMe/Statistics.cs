@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace TalkToMe
 {
     public partial class Statistics : Form
     {
+        string connectionString = "data source=192.168.1.4, 1433;initial catalog=TTM;User ID='sa';Password='adm123'";
+
         string login;
         public string yourNickname
         {
@@ -146,9 +149,6 @@ namespace TalkToMe
 
             else
                 command = $"Select Distinct DialogCode, Count(DialogCode) From Messages Where (Addressant = '{yourNickname}' Or Addressee = '{yourNickname}') And (SendDate >= Cast('{date1}' As datetime) And SendDate <= Cast('{date2}' As datetime)) Group By DialogCode Order by Count(DialogCode) DESC";
-
-
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=TTM; Integrated Security=SSPI;";
 
             try
             {
